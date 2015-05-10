@@ -79,6 +79,25 @@
 	第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：
 
 	然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
-	
+
 	最后友情提示，在GitHub上免费托管的Git仓库，任何人都可以看到喔（但只有你自己才能改）。所以，不要把敏感信息放进去。
 	如果你不想让别人看到Git库，有两个办法，一个是交点保护费，让GitHub把公开的仓库变成私有的，这样别人就看不见了（不可读更不可写）。另一个办法是自己动手，搭一个Git服务器，因为是你自己的Git服务器，所以别人也是看不见的。这个方法我们后面会讲到的，相当简单，公司内部开发必备。
+
+8.添加远程仓库
+	首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库
+	
+	现在，我们根据GitHub的提示，在本地的learngit仓库下运行命令：
+	$ git remote add origin git@github.com:xxxx/yyyyy.git
+	xxxx自己的github名称，yyyy为仓库名
+
+	下一步，就可以把本地库的所有内容推送到远程库上：
+	$ git push -u origin master	首次时
+		由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+	从现在起，只要本地作了提交，就可以通过命令：
+	$ git push origin master
+
+	小结
+	要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
+	关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+	此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+	分布式版本系统的最大好处之一是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作，而SVN在没有联网的时候是拒绝干活的！当有网络的时候，再把本地提交推送一下就完成了同步，真是太方便了！
