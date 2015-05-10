@@ -26,3 +26,6 @@
 	提交修改和提交新文件是一样的两步：
 	git add <file>
 	git commit -m "注释"
+	
+	要随时掌握工作区的状态，使用git status命令。
+	如果git status告诉你有文件被修改过，用git diff可以查看修改内容。
