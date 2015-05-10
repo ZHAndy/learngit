@@ -153,3 +153,29 @@
 		合并某分支到当前分支：git merge <name>
 
 		删除分支：git branch -d <name>
+
+11.解决冲突
+	准备新的feature1分支，继续我们的新分支开发：
+	$ git checkout -b feature1
+
+	在feature1分支上提交：
+	$ git add readme.txt 
+	$ git commit -m "AND simple"
+	
+	切换到master分支：
+	$ git checkout master
+	Git还会自动提示我们当前master分支比远程的master分支要超前1个提交。
+	提交：
+	$ git add readme.txt 
+	$ git commit -m "& simple"
+	再提交：
+	$ git add readme.txt 
+	$ git commit -m "conflict fixed"
+	用带参数的git log也可以看到分支的合并情况：
+	$ git log --graph --pretty=oneline --abbrev-commit
+	现在，删除feature1分支：
+	$ git branch -d feature1
+
+	小结:
+	当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
+	用git log --graph命令可以看到分支合并图。
