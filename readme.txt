@@ -101,3 +101,55 @@
 	关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
 	此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
 	分布式版本系统的最大好处之一是在本地工作完全不需要考虑远程库的存在，也就是有没有联网都可以正常工作，而SVN在没有联网的时候是拒绝干活的！当有网络的时候，再把本地提交推送一下就完成了同步，真是太方便了！
+
+9.从远程库克隆
+	首先，登陆GitHub，创建一个新的仓库，名字叫gitskills：
+	勾选Initialize this repository with a README，这样GitHub会自动为我们创建一个README.md文件。
+	现在，远程库已经准备好了，下一步是用命令git clone克隆一个本地库：
+	$ git clone git@github.com:xxxxx/yyyyy.git
+	$ cd yyyy
+	$ ls
+
+	小结
+	要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。
+	Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
+
+10.创建分支并合并
+	首先，我们创建dev分支，然后切换到dev分支：
+	$ git checkout -b dev
+	git checkout命令加上-b参数表示创建并切换，相当于以下两条命令：
+	$ git branch dev
+	$ git checkout dev
+	然后，用git branch命令查看当前分支：
+	$ git branch
+		git branch命令会列出所有分支，当前分支前面会标一个*号。
+
+	然后，我们就可以在dev分支上正常提交，比如对readme.txt做个修改
+	然后提交：
+	$ git add readme.txt 
+	$ git commit -m "branch test"
+
+	现在，dev分支的工作完成，我们就可以切换回master分支：
+	$ git checkout master
+	现在，我们把dev分支的工作成果合并到master分支上：
+	$ git merge dev
+
+	合并完成后，就可以放心地删除dev分支了：
+	$ git branch -d dev
+	删除后，查看branch，就只剩下master分支了：
+	$ git branch
+
+	小结
+		Git鼓励大量使用分支：
+
+		查看分支：git branch
+
+		创建分支：git branch <name>
+
+		切换分支：git checkout <name>
+
+		创建+切换分支：git checkout -b <name>
+
+		合并某分支到当前分支：git merge <name>
+
+		删除分支：git branch -d <name>
